@@ -21,7 +21,7 @@ application/common/field 目录中存放内容类型。
 
 <code>
 
-<?php
+
 namespace app\common\field;
 class Post extends Base{
 	public $title = '文章';
@@ -77,7 +77,6 @@ class Post extends Base{
 
 <code>
 
-<?php
 namespace app\common\field;
 class Type extends Base{
 	public $title = '分类';
