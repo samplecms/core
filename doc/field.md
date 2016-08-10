@@ -23,8 +23,11 @@ application/common/field 目录中存放内容类型。
 
 
 namespace app\common\field;
+
 class Post extends Base{
+
 	public $title = '文章';
+	
 	public $table = 'posts_test';
 	
  
@@ -78,8 +81,11 @@ class Post extends Base{
 <code>
 
 namespace app\common\field;
+
 class Type extends Base{
+
 	public $title = '分类';
+	
 	public $table = 'type';
 	
 	public $message = [
