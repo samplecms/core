@@ -66,16 +66,15 @@ class Post extends Base{
 	];
 	
 	
-	public function query(){
-
-
-	}
-	
-	
+ 
 	
 }
 </code>
+
+
 类型定义Type.php
+
+
 <code>
 
 <?php
@@ -123,6 +122,9 @@ class Type extends Base{
 	
 	
 }
+
 </code>
+
+
 
 以上代码将自动生成文章列表 表单验证等等。
