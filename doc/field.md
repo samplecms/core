@@ -19,116 +19,116 @@ application/common/field 目录中存放内容类型。
 	
 如文章定义Post.php
 
-<code>
-
-
-namespace app\common\field;
-
-class Post extends Base{
-
-	public $title = '文章';
-	
-	public $table = 'posts_test';
-	
  
-	public $message = [
-			'title.require'  =>  ['title'=>'标题必须'],
-			'title.min'  =>  ['title'=>'标题字符不少于6'],
-			'content' => ['content'=>'内容必须'],
-	];
+
+
+	namespace app\common\field;
 	
+	class Post extends Base{
 	
-	public $rule = [
-			'title'  =>  'require|min:6',
-			'content' =>  'require',
-	];
-	
-	public $field = [
-		'title'=>[
-			'label'=>'标题',	
-			'element'=>'input',
-				
-		],
-		'content'=>[
-				'label'=>'内容',
-				'element'=>'editor'
-		],
-			
-		'type'=>[
-				'label'=>'分类',
-				'element'=>'select',
-				'data'=>"Type::element_select",
-		],
-	];
+		public $title = '文章';
+		
+		public $table = 'posts_test';
+		
 	 
+		public $message = [
+				'title.require'  =>  ['title'=>'标题必须'],
+				'title.min'  =>  ['title'=>'标题字符不少于6'],
+				'content' => ['content'=>'内容必须'],
+		];
+		
+		
+		public $rule = [
+				'title'  =>  'require|min:6',
+				'content' =>  'require',
+		];
+		
+		public $field = [
+			'title'=>[
+				'label'=>'标题',	
+				'element'=>'input',
+					
+			],
+			'content'=>[
+					'label'=>'内容',
+					'element'=>'editor'
+			],
+				
+			'type'=>[
+					'label'=>'分类',
+					'element'=>'select',
+					'data'=>"Type::element_select",
+			],
+		];
+		 
+		
+		
+		public $scene = [
+				'add'   =>  ['title','content'],
+				'edit'  =>  ['title','content'],
+		];
+		
+		
+	 
+		
+	}
 	
-	
-	public $scene = [
-			'add'   =>  ['title','content'],
-			'edit'  =>  ['title','content'],
-	];
-	
-	
- 
-	
-}
-</code>
 
 
 类型定义Type.php
 
 
-<code>
 
-namespace app\common\field;
 
-class Type extends Base{
-
-	public $title = '分类';
+	namespace app\common\field;
 	
-	public $table = 'type';
+	class Type extends Base{
 	
-	public $message = [
-			'title.require'  =>  ['title'=>'标题必须'],
-			'title.min'  =>  ['title'=>'标题字符不少于3'],
-	];
-	
-	
-	public $rule = [
-			'title'  =>  'require|min:3',
-	];
-	
-	public $field = [
-		'title'=>[
-			'label'=>'标题',	
-			'element'=>'input',
+		public $title = '分类';
+		
+		public $table = 'type';
+		
+		public $message = [
+				'title.require'  =>  ['title'=>'标题必须'],
+				'title.min'  =>  ['title'=>'标题字符不少于3'],
+		];
+		
+		
+		public $rule = [
+				'title'  =>  'require|min:3',
+		];
+		
+		public $field = [
+			'title'=>[
+				'label'=>'标题',	
+				'element'=>'input',
+					
+			],
+			 
 				
-		],
+		];
 		 
-			
-	];
-	 
-	
-	
-	public $scene = [
-			'add'   =>  ['title'],
-			'edit'  =>  ['title'],
-	];
-	
-	static function element_select(){
-		$all = db('type')->order('_id','desc')->select();
-		$out[] = '请选择';
-		foreach($all as $v){
-			$out[(string)$v['_id']] = $v['title'];
+		
+		
+		public $scene = [
+				'add'   =>  ['title'],
+				'edit'  =>  ['title'],
+		];
+		
+		static function element_select(){
+			$all = db('type')->order('_id','desc')->select();
+			$out[] = '请选择';
+			foreach($all as $v){
+				$out[(string)$v['_id']] = $v['title'];
+			}
+			return $out;
 		}
-		return $out;
+		
+		
+		
 	}
-	
-	
-	
-}
 
-</code>
+
 
 
 
