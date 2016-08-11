@@ -34,9 +34,9 @@ class Type extends Base{
 				'label'=>'状态',
 				'element'=>'select',
 				'data'=>[
-					
-					0=>'禁用',
 					1=>'启用',
+					-1=>'禁用',
+					
 				]
 		],
 			

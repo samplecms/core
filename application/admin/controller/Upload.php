@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 use app\common\Str as str;
+use app\common\Img;
 use Dflydev\ApacheMimeTypes\PhpRepository;
 class upload{
 	
@@ -56,7 +57,7 @@ class upload{
 			$one = field_model('Upload')->where('hash',$hash)->find();
 			if($one){
 				
-				exit(json_encode(['name'=>$one->name,]+$ret));
+				exit(json_encode(['name'=>$one->name,'thumb'=>Img::thumb($one->name),]+$ret));
 					
 			}
 		}
@@ -133,6 +134,7 @@ class upload{
 					field_model('Upload')->save(['hash'=>$h1],['_id'=>$nid]);
 					$data['hash'] = $h1;
 				}
+				$data['thumb'] = Img::thumb($data['name']);
 				exit(json_encode($data+$ret));
 	}
 	

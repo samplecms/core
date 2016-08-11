@@ -50,7 +50,7 @@ class UserAdmin extends Base{
 				'element'=>'select',
 				'data'=>[
 					1=>'启用',
-					0=>'禁用',
+					-1=>'禁用',
 					
 				]
 		],

@@ -134,7 +134,8 @@ class Form
  					$selected = null;
  					if(is_array($value) && in_array($v,$value))
  						$selected = "selected";	
- 					elseif($v==$value)  $selected = "selected";
+ 					elseif(!empty($value) && $v==$value)  $selected = "selected";
+ 					
  					$str .= "<option value='".$v."' $selected >".$label."</option>";
  				}
  				return static::element($name,'select',true,$str);

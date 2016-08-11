@@ -38,7 +38,16 @@ class Post extends Base{
 		],
 		'files'=>[
 				'label'=>'图片',
-				'element'=>'upload'
+				'element'=>'upload',
+				'option'=>[
+					'call'=>"
+						$('.form-field-files img').click(function(){
+							 	console.log($(this).attr('src'));
+								redactor_content.insertHtml('<img src=\"'+$(this).attr('rel')+'\" />');	
+						});
+						
+					",
+				]
 		],			
 		'type'=>[
 				'label'=>'分类',
@@ -48,10 +57,9 @@ class Post extends Base{
 		'status'=>[
 				'label'=>'状态',
 				'element'=>'select',
-				'data'=>[
-					
-					0=>'禁用',
+				'data'=>[  
 					1=>'启用',
+					-1=>'禁用',
 				]
 		],
 

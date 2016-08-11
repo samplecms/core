@@ -21,7 +21,7 @@ class Redactor extends Base{
 		$this->cssLink[] = $baseUrl.'redactor.css';
 		$this->script[] = "
 			
-				$('".$this->ele."').redactor({
+				var redactor_".substr($this->ele,1)." = $('".$this->ele."').redactor({
 					fixed: true
 				});
 			";

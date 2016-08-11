@@ -62,6 +62,11 @@ class Field extends \app\common\AdminController{
     	$this->m = new $a();
     }
     
+
+    public function jump($type){
+
+        $this->success('操作成功', url('admin/field/index',['eqtype'=>$type]) , '',1);
+    }
      
     public function create($eqtype,$id=null)
     {
@@ -88,6 +93,7 @@ class Field extends \app\common\AdminController{
     		$type1 = $v['element'];
     		$attr['label'] = $v['label'];
     		$attr['value'] = $values[$k];
+            $attr['option'] = $v['option'];
     		if($datas){
     			$attr['data'] = $datas;
     		}
@@ -193,8 +199,9 @@ class Field extends \app\common\AdminController{
     		exit;
     	}else{
     		// 验证失败 输出错误信息
-    		$output['msg'] = ['title'=>'成功'];
-    		$output['page_goto'] = $this->url;
+    		//$output['msg'] = ['title'=>'成功'];
+    		$output['page_goto'] = url('admin/field/jump',['type'=>$eqtype]);
+            
     		echo json_encode($output);
     		exit;
     	}

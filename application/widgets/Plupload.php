@@ -18,6 +18,7 @@ namespace app\widgets;
  *
  */
 use app\common\Str as str;
+use app\common\Img;
 class Plupload extends Base{
 
 	public $version = 1.0;
@@ -42,17 +43,17 @@ class Plupload extends Base{
 
 		$data = $this->option['data'];
 
-			
+		$call = $this->option['call'];
 
 		$this->setELE();
 		$var = $this->var;
 
 		unset($dataString);
-		if($data){
+		if($data){  
 			foreach ($data as $vo){
 				$dataString .=  "<div class='pluploadCkeditor '>
 					<span class='fa fa-remove pluploadRemoveFile'></span>
-					<img class='img-thumbnail' style='5px 5px 0px 0px;width:200px;height:200px;' src='".$vo."' />";
+					<img class='img-thumbnail' style='5px 5px 0px 0px;width:200px;height:200px;' src='".Img::thumb($vo)."'  rel='".$vo."' />";
 				$dataString .=  "<input type='hidden' name='".$this->ele."[]' value='".$vo."' ></div>";
 			}
 		}
@@ -63,17 +64,23 @@ class Plupload extends Base{
 				<div id="'.$this->uploadBtn.'_0" class="uploader">'.$dataString.'</div>
 				<script>var globalHashFile = new Array;</script>
 			';
-		$this->script[] = "
-				insertHtmlPlupload();
-				pluploadRemoveFile();
-				function insertHtmlPlupload(){
+			/*
+			function insertHtmlPlupload_".$var."(){
 					$(\".pluploadCkeditor img\").click(function(){
 						var str = '<img src=\"'+$(this).attr(\"src\")+'\"/>';
 
 					});
-				}
+				}*/
 
-				function pluploadRemoveFile(){
+		$this->script[] = "
+				 
+				pluploadRemoveFile_".$var."();
+				 
+
+				function pluploadRemoveFile_".$var."(){
+
+					$('.uploader').sortable();
+
 					$('.pluploadRemoveFile').hide();
 					$('.pluploadCkeditor').mouseover(function(){
 						$(this).find('.pluploadRemoveFile').show();
@@ -83,13 +90,12 @@ class Plupload extends Base{
 					$('.pluploadRemoveFile').click(function(){
 						$(this).parent('.pluploadCkeditor').remove();
 					});
+					".$call."
 				}
 		
 								"
 				;
-				if($this->option['CKEDITOR']){
-					$str = "insertHtmlPlupload();pluploadRemoveFile();";
-				}
+			 
 
 				$var = $this->var;
 
@@ -257,12 +263,12 @@ class Plupload extends Base{
 				if(res.error){
 					$('#'+file.id+ \" .plupload_file_name_wrapper\").css('color','red').html('图片有问题');
 				}else{
-					var img = \"<img class='img-thumbnail' style='5px 5px 0px 0px;width:200px;height:200px;' src='\"+res.name+\"'/>\";
+					var img = \"<img class='img-thumbnail' style='5px 5px 0px 0px;width:200px;height:200px;' rel='\"+res.name+\"' src='\"+res.thumb+\"'/>\";
 					var html = \"<div class='pluploadCkeditor'><span class='glyphicon glyphicon-remove pluploadRemoveFile'></span>\"+img+\"<input type='hidden' name='".$this->ele."[]' value='\"+res.name+\"' ></div>\";
 					$('#".$this->uploadBtn."_0').append(html);
 					".$str."
 				}
-				pluploadRemoveFile();
+				pluploadRemoveFile_".$var."();
 			});
 			".$var." .init();
 

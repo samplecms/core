@@ -11,7 +11,7 @@
 namespace app\common\model;
 
 use think\Model;
-
+use think\Db;
 
 class Field extends Model
 {
@@ -42,8 +42,6 @@ class Field extends Model
 		$this->table = self::reset_table();
 		$this->field = self::reset_field();
 		
-		
-		
 	}
 	//filed_class_name 对应 app\common\field\*
 	public function set_filed_class_name($name){
@@ -64,7 +62,49 @@ class Field extends Model
 		self::$reset_table = $table;
 	}
 
-
+	/**
+     * 获取当前模型的数据库查询对象
+     * @access public
+     * @return Query
+     */
+    public function db()
+    {
+        $model = $this->class;
+       // if (!isset(self::$links[$model])) {
+            // 设置当前模型 确保查询返回模型对象
+            $query = Db::connect($this->connection)->model($model);
+            // 设置当前数据表和模型名
+            if (!empty($this->table)) {
+                $query->setTable($this->table);
+            } else {
+                $query->name($this->name);
+            }
+            if (!empty($this->field)) {
+                if (true === $this->field) {
+                    $type = $this->db()->getTableInfo('', 'type');
+                } else {
+                    $type = [];
+                    foreach ((array) $this->field as $key => $val) {
+                        if (is_int($key)) {
+                            $key = $val;
+                            $val = 'varchar';
+                        }
+                        $type[$key] = $val;
+                    }
+                }
+                $query->setFieldType($type);
+                $this->field = array_keys($type);
+                $query->allowField($this->field);
+            }
+            if (!empty($this->pk)) {
+                $query->pk($this->pk);
+            }
+            self::$links[$model] = $query;
+      //  }
+        // 返回当前模型的数据库查询对象
+        return self::$links[$model];
+    }
+	 
 
 
 

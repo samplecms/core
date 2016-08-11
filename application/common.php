@@ -103,6 +103,18 @@ if(!function_exists('field_url_create')){
 
 }
 
+
+if(!function_exists('img_url')){
+
+	function img_url(){
+		if(in_array(get_ip(),['127.0.0.1','::1'])){
+			return base_url();
+		}
+		return 'http://img.mm.wstaichi.com/';
+	}
+
+}
+
 if(!function_exists('widgets')){
 
 	function widgets($name=null,$par=null){
@@ -127,6 +139,8 @@ if(!function_exists('field_model')){
  function __field_model($eqtype){
  		$eqtype = ucfirst($eqtype);
  		static $_model;
+ 		 
+ 		
  		if($_model[$eqtype]){
  			return $_model[$eqtype];
  		}
@@ -136,12 +150,14 @@ if(!function_exists('field_model')){
 		
 		$title = $field_class->title;
 
+
 		//设置验证规则
     	$rule  = $field_class->rule;
     	$message  = $ield_class->message;
     	$a = "\app\common\model\Field";
     	$a::reset_table($field_class->table);
     	 
+
     	$model = new $a();
 
     	$validate = \think\Loader::validate('Field');
@@ -150,6 +166,8 @@ if(!function_exists('field_model')){
 
         $_model[$eqtype]['model'] = $model;
         $_model[$eqtype]['class'] = $field_class;
+
+
         return $_model[$eqtype];
 
 
@@ -157,16 +175,7 @@ if(!function_exists('field_model')){
 }
 
 
-if(!function_exists('img_url')){
 
-	function img_url(){
-		if(in_array(get_ip(),['127.0.0.1','::1'])){
-			return base_url();
-		}
-		return 'http://img.mm.wstaichi.com/';
-	}
-
-}
 
 if(!function_exists('helper_version')){
 

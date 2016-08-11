@@ -18,7 +18,7 @@ class Field
 	*/
  	static function __callStatic($method,$par = []){  
  			$arr = $par[0];
- 			$str = self::_start();
+ 			$str = self::_start($arr['field']);
 			$str .= Form::label($arr['label'])."\n";
 			$str .= Form::$method($arr['field'],['value'=>$arr['value'],'data'=>$arr['data'],'class'=>'form-control'])."\n";
 			$str .= self::_end($arr['field']);
@@ -33,18 +33,24 @@ class Field
 	
 	
 	static function upload($arr = []){
-		$str = self::_start();
-		$str .= Form::label($arr['label'])."\n";
-		$str .= widgets('Plupload',[
- 	  			'ele'=>$arr['field'],
- 	  			'option'=>[
+		$option = $arr['option']?:[];
+		 
+		$default_opt = [
  					'maxSize'=>'100',
  					'class'=>'picture',
  					'count'=>1	,
  					'data'=>$arr['value'],
   					'url'=>url('admin/upload/index'),
   					'urlHash'=>url('admin/upload/hash'),
- 		  		]
+ 		  		];
+
+ 		$option = $option+$default_opt;
+
+		$str = self::_start($arr['field']);
+		$str .= Form::label($arr['label'])."\n";
+		$str .= widgets('Plupload',[
+ 	  			'ele'=>$arr['field'],
+ 	  			'option'=>$option
  		]);
  		$str .= self::_end($arr['field']);
  		return $str;
@@ -52,8 +58,8 @@ class Field
 	
 	 
 	
-	static function _start(){
-		return '<div class="form-group">'."\n";
+	static function _start($field){
+		return '<div class="form-group form-field-'.$field.'">'."\n";
 	}
 	
 	static function _end($field){
