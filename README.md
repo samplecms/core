@@ -18,3 +18,4 @@ runtime
 public/thumb
 
 
+![Alt text](/doc/img/login.png)
