@@ -1,0 +1,25 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{block name="title"}标题{/block}</title>
+
+{:link([
+base_url().'misc/bootstrap/css/bootstrap.min.css',
+base_url().'misc/Flat-UI/dist/css/flat-ui.min.css',
+theme_url().'misc/css.css',
+])}
+ 
+
+</head>
+<body>
+{block name="menu"}{/block}
+ 
+{block name="content"}{/block}
+{block name="right"}{/block}
+{block name="footer"}{/block}
+<script src="{:base_url()}misc/jquery.js"></script>
+<script src="{:base_url()}misc/jquery.pajax.js"></script>
+<script src="{:theme_url()}misc/js.js"></script>
+<script src="{:base_url()}misc/Flat-UI/dist/js/flat-ui.min.js"></script>
+</body>
+</html>

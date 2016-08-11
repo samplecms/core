@@ -1,0 +1,44 @@
+{extend name="admin" /}
+{block name="content"}
+	
+
+<p>{:$title}
+
+<a href="{:url('admin/field/create',['eqtype'=>$type])}">
+<span class='label label-info'>创建</span>
+</a>
+
+<a href="{:url('admin/index/index')}">
+<span class='glyphicon glyphicon-home'></span>
+</a>
+
+</p>
+
+<form method="post" class="{:$sort}" action="{:url('admin/field/sort',['eqtype'=>$type])}">
+    <div class='info'></div>
+    <table class="table table-bordered " >
+      <thead>
+        <tr>
+          <th>标题</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {volist name='list' id='v'}
+        <tr>
+          <th>{php}echo $v->$field0{/php}
+          <input type='hidden' value="{$v._id}" name="sorttable[]">
+          </th>
+          <td>
+          	<a class='glyphicon glyphicon-edit' href="{:url('admin/field/create',['eqtype'=>$type,'id'=>$v._id])}"></a>
+          </td>
+        </tr>
+      {/volist}
+        
+      </tbody>
+    </table>
+    <input type="submit" id='submit' value="保存排序?" style='display: none;'>
+ </form>
+  	{$list->render()}  
+    
+{/block}

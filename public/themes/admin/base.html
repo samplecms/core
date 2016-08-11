@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{block name="title"}标题{/block}</title>
+
+
+{:helper_link([
+base_url().'misc/bootstrap/css/bootstrap.min.css',
+base_url().'misc/Flat-UI/dist/css/flat-ui.min.css',
+theme_url().'misc/css.css',
+
+])}
+ 
+{:widgets('Font')}
+{:widgets('JqueryUi')}
+
+</head>
+<body>
+{block name="menu"}{/block}
+
+<div class="container">
+{block name="content"}{/block}
+</div>
+
+{block name="right"}{/block}
+{block name="footer"}{/block}
+
+
+
+{:helper_link([
+base_url().'misc/jquery.js',
+base_url().'misc/jquery.form.js',
+base_url().'misc/jquery.pajax.js',
+base_url().'misc/Flat-UI/dist/js/flat-ui.min.js',
+theme_url().'misc/js.js',
+])}
+ 
+ 
+{:widgets()}
+
+ 
+</body>
+</html>

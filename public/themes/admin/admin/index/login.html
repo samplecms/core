@@ -1,0 +1,33 @@
+{extend name="base" /}
+{block name="content"}
+	
+
+
+<form class='ajax_form' method="post">
+  <div class="form-group">
+    <label for="">用户名</label>
+    <input type="text" class="form-control" name='user' placeholder="">
+    <div class='error error_user'></div>
+  </div>
+  <div class="form-group">
+    <label for="">密码</label>
+    <input type="password" class="form-control" name="pwd">
+    <div class='error error_pwd'></div>
+  </div>
+   
+  <div class="form-group">
+    <label for="">验证码</label>
+    <input type="captcha" class="form-control" name="captcha">
+    
+    <img src="{:captcha_src()}" class='captcha hand' alt="captcha" />
+    <div class='error error_captcha'></div>
+  </div>
+
+   
+  <button type="submit" class="btn btn-default">登录</button>
+</form>
+
+
+	 
+ 
+{/block}

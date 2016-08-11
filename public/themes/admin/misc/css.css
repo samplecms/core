@@ -1,0 +1,30 @@
+#page{
+	padding-top: 30px;
+} 
+ 
+.label , .glyphicon{
+	margin-right:10px;
+	margin-left:10px;
+}
+
+#page .menu_left{
+	margin-top: 20px;
+}
+
+#page .main{
+	margin-top: 20px;
+}
+
+.hand{
+	cursor: pointer;
+}
+
+.uploader img{
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.form-group {
+    position: static;
+    
+}
