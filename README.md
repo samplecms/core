@@ -17,5 +17,11 @@ public/assets
 runtime
 public/thumb
 
+部分截图
+=====
 
 ![Alt text](/doc/img/login.png)
+
+![Alt text](/doc/img/post.png)
+
+![Alt text](/doc/img/type.png)
