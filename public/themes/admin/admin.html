@@ -15,13 +15,13 @@ theme_url().'misc/css.css',
 {:widgets('JqueryUi')}
 
 </head>
-<body>
+<body id='body'>
 
-
+ 
 <div class="container" id='page'>
 
 <div class="row">
-  <div class="col-xs-2 menu_left"  >
+  <div class="col-xs-2 menu_left"  id='left' >
   		{php}$admin_menu_list = app\helper\Comm::admin_menu();{/php}
   		<div class="list-group ">
    				{volist name='admin_menu_list' id='v' key='key'}
@@ -34,7 +34,7 @@ theme_url().'misc/css.css',
   		
     
   </div>
-  <div class="col-xs-10 main">
+  <div class="col-xs-10 main" id='main'> 
     	{block name="content"}{/block}
   </div>
 </div>
@@ -58,6 +58,6 @@ theme_url().'misc/js.js',
  
 {:widgets()}
 
- 
-</body>
+
+ </body>
 </html>

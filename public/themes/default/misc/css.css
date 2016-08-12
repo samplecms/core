@@ -1,7 +1,42 @@
+#page{
+	padding-top: 30px;
+} 
  
-.login-screen {
-    max-width: 865px;
-    overflow: hidden;
+.label , .glyphicon{
+	margin-right:10px;
+	margin-left:10px;
+}
+
+#page .menu_left{
+	margin-top: 20px;
+}
+
+#page .main{
+	margin-top: 20px;
+}
+
+.hand{
+	cursor: pointer;
+}
+
+.uploader img{
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.form-group {
+    position: static;
     
 }
- 
+
+.pluploadCkeditor{
+	float:left;
+	position:relative ;
+}
+.pluploadRemoveFile {
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    left: 168px;
+    color: red;
+}

@@ -6,10 +6,10 @@
 // +----------------------------------------------------------------------
 // | Author: sunkangchina <weichat>
 // +----------------------------------------------------------------------
-namespace app\common\field;
+namespace app\model;
 use app\common\Hook;
 class Post extends Base{
-	public $title = '文章';
+	public $field_title = '文章';
 	public $table = 'posts';
 	
 	public $allowField = ['title','content','type','status','sort','files'];
@@ -26,7 +26,7 @@ class Post extends Base{
 			'content' =>  'require',
 	];
 	
-	public $field = [
+	public $field_form = [
 		'title'=>[
 			'label'=>'标题',	
 			'element'=>'input',
@@ -74,9 +74,9 @@ class Post extends Base{
 	];
 	
 
-	 public function init(){
-		parent::init();
-		Hook::add('admin.field.before_insert','app\common\field\Post@before_insert');
+	 public function init_hook(){
+		parent::init_hook();
+		Hook::add('admin.field.before_insert','app\model\Post@before_insert');
 		 
 
 

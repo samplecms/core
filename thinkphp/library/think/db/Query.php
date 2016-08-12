@@ -749,7 +749,7 @@ class Query
         if (isset($this->options['field'])) {
             $field = array_merge($this->options['field'], $field);
         }
-        $this->options['field'] = $field;
+        $this->options['field'] = array_unique($field);
         return $this;
     }
 
@@ -1415,8 +1415,10 @@ class Query
     {
         $types = $this->getFieldsType($options);
         $bind  = [];
-        foreach ($types as $key => $type) {
-            $bind[$key] = $this->getFieldBindType($type);
+        if ($types) {
+            foreach ($types as $key => $type) {
+                $bind[$key] = $this->getFieldBindType($type);
+            }
         }
         return $bind;
     }

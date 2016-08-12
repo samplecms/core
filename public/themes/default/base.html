@@ -1,25 +1,58 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>{block name="title"}标题{/block}</title>
+<title>{block name="title"}{if $title}{$title},{/if}{:app\\helper\\Title::get()}{/block}</title>
 
-{:link([
+
+{:helper_link([
 base_url().'misc/bootstrap/css/bootstrap.min.css',
 base_url().'misc/Flat-UI/dist/css/flat-ui.min.css',
 theme_url().'misc/css.css',
+
 ])}
  
+{:widgets('Font')}
+{:widgets('JqueryUi')}
+
+
+<meta name="keywords" content="{:app\\helper\\Seo::get('keywords')}" />
+<meta name="description" content="{:app\\helper\\Seo::get('description')}" />
+
 
 </head>
-<body>
-{block name="menu"}{/block}
+<body id='body'>
+
  
-{block name="content"}{/block}
-{block name="right"}{/block}
+
+<div class="container" id='page'> 
+  		
+		 
+  		 
+		{include file="header" /} 
+
+    	{block name="content"}{/block}
+		
+
+</div>
+
+ 
+
+
 {block name="footer"}{/block}
-<script src="{:base_url()}misc/jquery.js"></script>
-<script src="{:base_url()}misc/jquery.pajax.js"></script>
-<script src="{:theme_url()}misc/js.js"></script>
-<script src="{:base_url()}misc/Flat-UI/dist/js/flat-ui.min.js"></script>
-</body>
+
+
+
+{:helper_link([
+base_url().'misc/jquery.js',
+base_url().'misc/jquery.form.js',
+base_url().'misc/jquery.pajax.js',
+base_url().'misc/Flat-UI/dist/js/flat-ui.min.js',
+theme_url().'misc/js.js',
+])}
+ 
+ 
+{:widgets()}
+
+
+ </body>
 </html>

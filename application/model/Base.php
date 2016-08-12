@@ -1,16 +1,40 @@
 <?php
-namespace app\common\field;
-class Base{
+namespace app\model;
+
+use think\Model;
+use think\Db;
+class Base extends Model{
+	public $field_title;
+	protected $autoWriteTimestamp = 'datetime';
+	protected $createTime = 'create_at';
+	protected $updateTime = 'update_at';
+	
+	protected $table;
+	
+	// 字段属性
+	protected $field = [];
+
+
 	//每页显示记录
 	public $page = 10;
 	public $allowField;
-	public function __construct(){  
-		$this->init();
+
+	/**
+	 * 架构函数
+	 * @access public
+	 * @param array|object $data 数据
+	 */
+	public function __construct($data = [])
+	{
+		
+		parent::__construct($data);
+
+		$this->init_hook();
 	}
 
-	public function init(){
+	public function init_hook(){
 
-		\app\common\Hook::add('admin.field.index','app\common\field\Base@queryList');
+		\app\common\Hook::add('admin.field.index','app\model\Base@queryList');
 	}
 
 
@@ -25,9 +49,8 @@ class Base{
 	
 
 	static function queryList(&$m){
-		if($m->filed_class_name){
-			$model = field_class($m->filed_class_name);	
-			$sort = $model->support_query_sort();
+		if($m->allowField && in_array('sort', $m->allowField)){		 
+			$sort = $m->support_query_sort();
 		}
 		
 		if($sort)

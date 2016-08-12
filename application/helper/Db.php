@@ -8,38 +8,43 @@
 // +----------------------------------------------------------------------
 
 namespace app\helper;
+use app\model\Post;
+use app\model\Type;
 class Db{
 
     static function post($id){
-         return field_model('Post')->where('_id',$id)->find();
+         return Post::where('_id',$id)->find();
     }
 
 
 	static function posts(){
-		 return field_model('Post')->order('sort','desc')->order('_id','desc')->paginate(10);
+		 return Post::order('sort','desc')->order('_id','desc')->paginate(10);
 	}
 
     static function types(){
-         return field_model('Type')->order('sort','desc')->order('_id','desc')->paginate(10);
+         return Type::order('sort','desc')->order('_id','desc')->paginate(10);
     }
 
     static function posts_types($title){
 
-         $m = field_model('Type')->where('title',$title)->find();
+         $m = Type::where('title',$title)->find();
          if($m){
             $id = (string)$m->_id;
-             
-            return field_model('Post')
-                    ->where('type',$id)
+            $count = Post::where('type',$id)->count();
+            if($count==1){
+                return ['model'=>Post::where('type',$id)->find(),'count'=>$count];
+            }
+            $all = Post::where('type',$id)
                      ->order('sort','desc')
                      ->order('_id','desc')
                      ->paginate(10);
+            return ['model'=>$all,'count'=>$count];
          }      
-         return field_model('Post')->order('sort','desc')->order('_id','desc')->paginate(10);   
+           
     }
 
     static function type($id){
-         return field_model('Type')->where('_id',$id)->find();
+         return Type::where('_id',$id)->find();
     }
 
 }

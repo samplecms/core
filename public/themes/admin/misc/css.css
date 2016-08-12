@@ -1,3 +1,8 @@
+.form-group {
+	clear: both;
+	display: block;
+}
+
 #page{
 	padding-top: 30px;
 } 
@@ -27,4 +32,16 @@
 .form-group {
     position: static;
     
+}
+
+.pluploadCkeditor{
+	float:left;
+	position:relative ;
+}
+.pluploadRemoveFile {
+    cursor: pointer;
+    position: absolute;
+    top: 6px;
+    left: 168px;
+    color: red;
 }

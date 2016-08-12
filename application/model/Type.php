@@ -6,9 +6,9 @@
 // +----------------------------------------------------------------------
 // | Author: sunkangchina <weichat>
 // +----------------------------------------------------------------------
-namespace app\common\field;
+namespace app\model;
 class Type extends Base{
-	public $title = '分类';
+	public $field_title = '分类';
 	public $table = 'type';
 	
 	public $allowField = ['title','status','sort'];
@@ -23,7 +23,7 @@ class Type extends Base{
 			'title'  =>  'require|min:3',
 	];
 	
-	public $field = [
+	public $field_form = [
 		'title'=>[
 			'label'=>'标题',	
 			'element'=>'input',

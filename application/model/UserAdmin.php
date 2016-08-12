@@ -6,10 +6,10 @@
 // +----------------------------------------------------------------------
 // | Author: sunkangchina <weichat>
 // +----------------------------------------------------------------------
-namespace app\common\field;
+namespace app\model;
 use app\common\Hook;
 class UserAdmin extends Base{
-	public $title = '管理员';
+	public $field_title = '管理员';
 	public $table = 'users';
 	
  	public $allowField = ['user','pwd','email','status','sort'];
@@ -29,7 +29,7 @@ class UserAdmin extends Base{
 			'pwd' =>  'require',
 	];
 	
-	public $field = [
+	public $field_form = [
 		'user'=>[
 			'label'=>'用户名',	
 			'element'=>'input',
@@ -69,10 +69,10 @@ class UserAdmin extends Base{
 
 
 
-	public function init(){
-		parent::init();
-		Hook::add('admin.field.before_save','app\common\field\UserAdmin@before_save');
-		Hook::add('admin.field.before_update','app\common\field\UserAdmin@before_update');
+	public function init_hook(){
+		parent::init_hook();
+		Hook::add('admin.field.before_save','app\model\UserAdmin@before_save');
+		Hook::add('admin.field.before_update','app\model\UserAdmin@before_update');
 
 
 		

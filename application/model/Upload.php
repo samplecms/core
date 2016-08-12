@@ -6,10 +6,10 @@
 // +----------------------------------------------------------------------
 // | Author: sunkangchina <weichat>
 // +----------------------------------------------------------------------
-namespace app\common\field;
+namespace app\model;
 use app\common\Hook;
 class Upload extends Base{
-	public $title = '上传文件';
+	public $field_title = '上传文件';
 	public $table = 'system_upload';
 	
 	public $allowField = [

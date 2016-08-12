@@ -144,28 +144,10 @@ if(!function_exists('field_model')){
  		if($_model[$eqtype]){
  			return $_model[$eqtype];
  		}
-		$field = ucfirst($eqtype);
-		$a =  "\app\common\\field\\".$field;
-		$field_class = new $a;
-		
-		$title = $field_class->title;
-
-
-		//设置验证规则
-    	$rule  = $field_class->rule;
-    	$message  = $ield_class->message;
-    	$a = "\app\common\model\Field";
-    	$a::reset_table($field_class->table);
-    	 
-
-    	$model = new $a();
-
-    	$validate = \think\Loader::validate('Field');
-        $validate->rule($rule);
-        $validate->message($message);
-
-        $_model[$eqtype]['model'] = $model;
-        $_model[$eqtype]['class'] = $field_class;
+		 
+ 		$a =  "\app\model\\".$eqtype;
+        $_model[$eqtype]['model'] = new $a;
+        $_model[$eqtype]['class'] = $a;
 
 
         return $_model[$eqtype];

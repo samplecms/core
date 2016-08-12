@@ -6,9 +6,24 @@ $(function(){
 
        captcha_refresh();
 	 
-	     $('.flash').fadeOut(3000);
+	       
+        $('.flash').fadeOut(3000);
+       
 
-	       var fixHelper = function(e, ui) {  
+         ui_sort();
+
+
+         // $(document).pjax('a', '#page', { fragment: ('#page'), timeout: 10000 });
+
+
+
+	 
+});
+
+function ui_sort(){
+
+
+         var fixHelper = function(e, ui) {  
             //console.log(ui)   
             ui.children().each(function() {  
                 $(this).width($(this).width());     //在拖动时，拖动行的cell（单元格）宽度会发生改变。在这里做了处理就没问题了   
@@ -37,21 +52,7 @@ $(function(){
             }  
         }).disableSelection();  
         
-
-    	$('a').click(function(){
-
-    			$.pjax({
-    			  url: $(this).attr('href'),
-    			  container: '#html'
-    			});
-
-    	});
-
-	   
-
-});
-
-
+}
 function captcha_refresh(){
 
   $('img.captcha').click(function(){

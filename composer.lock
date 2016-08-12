@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/framework.git",
-                "reference": "c19d404606f1120d7fb137c72e1a176623868c16"
+                "reference": "0553c87a95b1d5b33d14ccb49bc5ea5351b27ca6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/top-think/framework/c19d404606f1120d7fb137c72e1a176623868c16.zip",
-                "reference": "c19d404606f1120d7fb137c72e1a176623868c16",
+                "url": "https://packagist.phpcomposer.com/files/top-think/framework/0553c87a95b1d5b33d14ccb49bc5ea5351b27ca6.zip",
+                "reference": "0553c87a95b1d5b33d14ccb49bc5ea5351b27ca6",
                 "shasum": ""
             },
             "require": {
@@ -107,7 +107,7 @@
                 "orm",
                 "thinkphp"
             ],
-            "time": "2016-08-10 11:58:29"
+            "time": "2016-08-11 10:22:08"
         },
         {
             "name": "topthink/think-captcha",
@@ -232,12 +232,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-mongo.git",
-                "reference": "44b035faad15aa0efc8b075b528d93edd4f72003"
+                "reference": "cb214670ffcf4741fd284410a8a59e183f366e56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/top-think/think-mongo/44b035faad15aa0efc8b075b528d93edd4f72003.zip",
-                "reference": "44b035faad15aa0efc8b075b528d93edd4f72003",
+                "url": "https://packagist.phpcomposer.com/files/top-think/think-mongo/cb214670ffcf4741fd284410a8a59e183f366e56.zip",
+                "reference": "cb214670ffcf4741fd284410a8a59e183f366e56",
                 "shasum": ""
             },
             "type": "library",
@@ -258,7 +258,7 @@
                 }
             ],
             "description": "mongodb driver for thinkphp5",
-            "time": "2016-08-09 08:40:19"
+            "time": "2016-08-11 15:10:17"
         }
     ],
     "packages-dev": [],
