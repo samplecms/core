@@ -1,0 +1,37 @@
+{extend name="base" /}
+{block name="content"}
+ 
+ <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">{$type}
+                        <strong></strong>
+                    </h2>
+                    <hr>
+                </div>
+                {volist name='model' id='v'}
+                <div class="col-lg-12 text-center">
+                    
+                    <img class="img-responsive img-border " src="{:app\\common\\Img::thumb($v->files[0],['w'=>5500,'h'=>'300'])}" alt="">
+               
+                    <h2>{$v->title}
+                        <br>
+                        <small>{$v->create_at}</small>
+                    </h2>
+                    <p>{:app\\common\\Str::cut(strip_tags($v->content),200)}</p>
+                    <a href="{:url('index/index/view',['id'=>$v->_id])}" class="btn btn-default btn-lg">阅读全部</a>
+                    <hr>
+                </div>
+                {/volist}
+        
+      
+  				{$model->render()}  
+
+
+            </div>
+        </div>
+
+   
+
+{/block}

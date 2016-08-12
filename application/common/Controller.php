@@ -23,7 +23,35 @@ class Controller extends Theme{
 
 		Cookie::prefix(get_domain().'_');
 		Session::prefix(get_domain().'_');
-		helper_version("2.1.0");
+		helper_version(config('version')?:"2.1.0");
+
+		if(is_local())
+			config('host',"");
+
+		$common = [
+			'Arr','Img',
+			'File','FieldSave',
+			'Hook','Str',
+			'WeekMonthDay',
+			'Widgets'
+		];
+
+		$helper = [
+			'Comm','Db',
+			'Seo','Title'
+		];
+
+		$a = "\app\\common\\";
+		$b = "\app\\helper\\";
+
+		foreach($common as $v){
+			class_alias($a.$v,strtolower($v));	
+		}
+		foreach($helper as $v){
+			class_alias($b.$v,strtolower($v));	
+		}
+
+
 
 	}
 }

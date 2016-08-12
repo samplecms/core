@@ -13,6 +13,10 @@ return [
     '__pattern__' => [
         'name' => '\w+',
     ],
-    'login'     => 'app/admin/index/login',
+
+    'page'     => 'index/index/page',
+    'page/:type'     => 'index/index/page',
+    'view/:id'     => 'index/index/view',
+    'login'     => 'admin/index/login',
 
 ];

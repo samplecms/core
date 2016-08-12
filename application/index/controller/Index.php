@@ -3,25 +3,34 @@ namespace app\index\controller;
 use app\helper\Db;
 use app\common\Img;
 use think\Lang;
-use app\helper\Title;
-use app\helper\Seo;
 class Index extends \app\common\FrontController
 {
-
-	 
-    public function index($type = null)
+    public $theme = 'business-casual';
+    
+    public function init(){
+        
+        parent::init();
+         
+    }
+	public function index()
     {
+     
+        return $this->make('/index');
+    }
+    public function page($type = null)
+    {
+        
         if($type){
             $m =  Db::posts_types($type);
         }else{
             $m =  Db::posts();    
         }
 
-
-        Title::set($type);
-        Seo::set('keywords',$type);
-        Seo::set('description',$type);
-
+ 
+        //title seo
+        $this->title = $type;
+        $this->description = $type;
+        $this->keywords = $type;
         
         $data['type'] = $type;
 
@@ -35,18 +44,24 @@ class Index extends \app\common\FrontController
         }
         
         
-        return  $this->make('/index',$data);
+        return  $this->make('/page',$data);
     }
 
 
 
     public function view($id)
     {
+        
+        
  		$p = $data['model'] =  Db::post($id);
         $type = $p->title;
-        Title::set($type);
-        Seo::set('keywords',$type);
-        Seo::set('description',$type);
+        
+
+        //title seo
+        $this->title = $type;
+        $this->description = $type;
+        $this->keywords = $type;
+        
 
         return  $this->make('/view',$data);
     }

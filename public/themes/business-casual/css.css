@@ -1,0 +1,5 @@
+#view_content img{
+	float:left;
+	margin-right: 10px;
+}
+.brand a,.brand a:hover{color: #fff;text-decoration: none;}

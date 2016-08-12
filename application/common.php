@@ -6,11 +6,10 @@
 // +----------------------------------------------------------------------
 // | Author: sunkangchina <weichat>
 // +----------------------------------------------------------------------
-
-
-
+ 
 
 // 应用公共文件
+
 
 if(!function_exists('get_ip')){
 
@@ -102,19 +101,7 @@ if(!function_exists('field_url_create')){
 	}
 
 }
-
-
-if(!function_exists('img_url')){
-
-	function img_url(){
-		if(in_array(get_ip(),['127.0.0.1','::1'])){
-			return base_url();
-		}
-		return 'http://img.mm.wstaichi.com/';
-	}
-
-}
-
+ 
 if(!function_exists('widgets')){
 
 	function widgets($name=null,$par=null){
@@ -171,11 +158,31 @@ if(!function_exists('helper_version')){
 }
 
 
+if(!function_exists('minify_html')){
+	function minify_html($data){
+		return \app\helper\Minify::html($data);
+	}
+}
+
+
+if(!function_exists('minify_css')){
+	function minify_css(){
+		return \app\helper\Minify::output('css');
+	}
+}
+
+
+if(!function_exists('minify_js')){
+	function minify_js(){
+		return \app\helper\Minify::output('js');
+	}
+}
+
 if(!function_exists('helper_link')){
 	//生成不重复的JS CSS
 	function helper_link($url,$version = null){
 		static $all;
-		 
+
 		$type = 'css';
 		if(is_string($url) && strpos($url,'.js')!==false){
 			$type = 'js';
@@ -185,14 +192,30 @@ if(!function_exists('helper_link')){
 
 			
 			$i++;
-			
+			$q = 0;
 			foreach($url as $v){
+				if($q == 0){
+					$type = 'css';
+					if(is_string($v) && strpos($v,'.js')!==false){
+						$type = 'js';
+					}
+				}
+				
+
+				$q++;
 				$link = helper_link($v,$version);
 				if(!$all[$link])
 					$links[] = $link;
 				$all[$link] = $link;
 
+				
+
 			}
+
+			if(config('minify_'.$type) === true){
+				return;
+			}
+			
 		
 			$go =  implode("\n",$links);
 			 
@@ -200,21 +223,33 @@ if(!function_exists('helper_link')){
 		}
 
 		if(is_local() === true && !$version){
-			$version = date('YmdHis');
+			$version = '1.0.1';
 		}
 
 		if(!$version){
 			$version = helper_version();
 		}
+		if(config('minify_js') === true || config('minify_css') === true){
+			\app\helper\Minify::set($url);
+		}
 
 		$url = $url."?v=".$version;
 		switch ($type) {
 			case 'js':
-				$link = '<script type="text/javascript" src="'.$url.'"></script>';
+				if(config('minify_js') === true){
+					$link = $url;
+				}else{
+					$link = '<script type="text/javascript" src="'.$url.'"></script>';	
+				}
+				
 				break;
 			
 			default:
-				$link = '<link rel="stylesheet" href="'.$url.'">';
+				if(config('minify_css') === true){
+					$link = $url;
+				}else{
+					$link = '<link rel="stylesheet" href="'.$url.'">';
+				}
 				break;
 		}
 
@@ -226,9 +261,26 @@ if(!function_exists('helper_link')){
 }
 
  
-if(!function_exists('theme_path')){
+if(!function_exists('theme_load_file')){
 
-	function theme_path($a){
+	function theme_load_file($file){
+		static $c;
+		if($c[$info]){
+			return $c[$info];
+		}
+		$info =  config('template.view_path').$file.'.php';
+		if(file_exists($info)){
+			$c[$info] = include $info;
+		}
+		return $c[$info];
+	}
+
+
+}
+
+if(!function_exists('theme_include')){
+
+	function theme_include($a){
 		$request = think\Request::instance();
 		$module  = $request->module();
 		$id = $request->controller();
@@ -305,6 +357,15 @@ if(!function_exists('base_url')){
 		return $request->root().DS;
 	}
 
+}
+
+if(!function_exists('theme_info')){ 
+	
+	function theme_info($name){
+		
+		return theme_load_file('info')[$name];
+
+	}
 }
 
 if(!function_exists('clean_mongo_array_injection')){

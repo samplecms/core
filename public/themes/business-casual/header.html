@@ -1,0 +1,38 @@
+ <div class="brand"><a href="/">{:theme_info('title')}</a></div>
+    <div class="address-bar">{:theme_info('subtitle')}</div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">Business Casual</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li {if condition="$type=='吴式太极拳'"} class="active"{/if}>
+                        <a href="{:url('index/index/page',['type'=>'吴式太极拳'])}">吴式太极拳</a></li>
+                    <li {if condition="$type=='课程安排'"} class="active"{/if}>
+                      <a href="{:url('index/index/page',['type'=>'课程安排'])}">课程安排</a></li>
+                    <li {if condition="$type=='招生简章'"} class="active"{/if}>
+                      <a href="{:url('index/index/page',['type'=>'招生简章'])}">招生简章</a></li>
+                    <li {if condition="$type=='联系方式'"} class="active"{/if}>
+                      <a href="{:url('index/index/page',['type'=>'联系方式'])}">联系方式</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+ 
+
+
+

@@ -50,9 +50,12 @@ class Widgets
 		$js = $css = $jsCode = $cssCode = "";
 		foreach ($full as $obj){
 			if($obj->scriptLink){
+				unset($array);
 				foreach($obj->scriptLink as $v){
-					$js .=  "<script type=\"text/javascript\" src='".$v."'></script>\n";
+					$array[] = $v;					
+					//$js .=  "<script type=\"text/javascript\" src='".$v."'></script>\n";
 				}
+				$js = helper_link ($array);
 			}
 			if($obj->script){
 				foreach($obj->script as $v){
@@ -61,9 +64,12 @@ class Widgets
 			}
 	
 			if($obj->cssLink){
+				unset($array);
 				foreach($obj->cssLink as $v){
-					$css.="<link rel=\"stylesheet\" href=\"".$v."\">\n";
+					$array[] = $v;	
+					//$css.="<link rel=\"stylesheet\" href=\"".$v."\">\n";
 				}
+				$css =helper_link ($array);
 			}
 			if($obj->css){
 				foreach($obj->css as $v){

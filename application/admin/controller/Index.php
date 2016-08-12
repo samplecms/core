@@ -7,7 +7,7 @@
 // | Author: sunkangchina <weichat>
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
-use app\common\field\UserAdmin as Model;
+use app\model\UserAdmin as Model;
 
 class Index extends \app\common\AdminController{
 	//允许没有权限访问规则 
@@ -22,9 +22,9 @@ class Index extends \app\common\AdminController{
 
     public function logout()
     { 
-         /*cookie('admin_id', null);
+         cookie('admin_id', null);
          cookie('admin_user', null);
-         cookie('admin_email', null);*/
+         cookie('admin_email', null);
          $this->success('退出系统成功', url('admin/index/login'));
 
     }

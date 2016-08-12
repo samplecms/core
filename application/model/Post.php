@@ -89,6 +89,15 @@ class Post extends Base{
 		$data['sort'] = time();
 	}
 
+
+	public function getFilesAttr($value){  
+		if(!$value){
+			return [ 
+				theme_url().'misc/img/slide-2.jpg'
+			];
+		}
+		return $value;
+	}
 	 
 	
 	

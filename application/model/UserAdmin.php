@@ -71,7 +71,7 @@ class UserAdmin extends Base{
 
 	public function init_hook(){
 		parent::init_hook();
-		Hook::add('admin.field.before_save','app\model\UserAdmin@before_save');
+		//Hook::add('admin.field.before_save','app\model\UserAdmin@before_save');
 		Hook::add('admin.field.before_update','app\model\UserAdmin@before_update');
 
 
@@ -79,15 +79,19 @@ class UserAdmin extends Base{
 	}
 	
 	
+	public function setPwdAttr($value){
+		if($value)
+			return password_hash(trim($value),PASSWORD_DEFAULT);
+	}
 
-	static function before_save(&$data){
+	/*static function before_save(&$data){
 		$value = $data['pwd'];
 		if(!trim($value)){
             return;
         }
         $data['pwd'] = password_hash(trim($value),PASSWORD_DEFAULT);
 
-	}
+	}*/
 
 	static function before_update(&$data){
 
@@ -100,14 +104,16 @@ class UserAdmin extends Base{
 
 
 	static function login($data = []){
+		
 		$model = field_model('UserAdmin')->find();
 		$m = $model->user;
 		if(!$m){
-			$m = field_model('UserAdmin');
+			$m = new \app\model\UserAdmin;
 			$data['user'] = 'admin';
 			$data['pwd'] = '123456';
 			$data['email'] = 'admin@admin.com';
-       		$result = $m->validate('User.add')->save($data);
+       		$result = $m->save($data);
+      
        		if(false === $result){
 	            // 验证失败 输出错误信息
 	            $output['msg'] = $m->getError();
@@ -124,7 +130,7 @@ class UserAdmin extends Base{
             echo json_encode($output);
             exit;
 		}
-		$captcha = trim($_POST['captcha']);
+		$captcha = trim($data['captcha']);
 		if(!captcha_check($captcha)){
 		 	$output['msg'] = ['captcha'=>'验证码错误'];
             $output['status'] = 0;
@@ -132,7 +138,7 @@ class UserAdmin extends Base{
             exit;
 		};
 
-		$model = field_model('UserAdmin')->find();
+		$model = field_model('UserAdmin')->where('user',$data['user'])->find();
 
 		if ( password_verify($data['pwd'],$model->pwd) ) {
 			$output['msg'] = ['user'=>'登录成功'];
@@ -166,7 +172,7 @@ class UserAdmin extends Base{
             exit;
 		}
 		$m = field_model('UserAdmin');
-        $result = $m->validate('Field.add')->save($data);
+        $result = $m->validate(['user'=>'require','pwd'=>'require'])->save($data);
         if(false === $result){
             // 验证失败 输出错误信息
             $output['msg'] = $m->getError();

@@ -46,6 +46,9 @@ class AdminController extends Acl{
 		config('url_route_on',true);
 		config('url_route_must',false);
 
-
+		config('minify_css',false);
+		config('minify_js',false);
+		config('minify_html',false);
+ 
 	}
 }
