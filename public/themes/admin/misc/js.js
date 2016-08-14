@@ -15,10 +15,12 @@ $(function(){
 
          // $(document).pjax('a', '#page', { fragment: ('#page'), timeout: 10000 });
 
-
+         
 
 	 
 });
+
+
 
 function ui_sort(){
 

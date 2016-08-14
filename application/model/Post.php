@@ -48,7 +48,54 @@ class Post extends Base{
 						
 					",
 				]
-		],			
+		],
+		'files_search'=>[
+				'element'=>'html',
+				'option'=>[
+					'html'=>
+						"
+						<a href='/helper/img/ajax' class='ajax_img'>
+						<span class='glyphicon glyphicon-search'></span>
+						</a>
+						<div id='ajax_img'></div>
+						"	
+					,
+					'css'=>"
+						.ajax_img{
+							position: relative;
+						    top: -54px;
+						    left: 80px;
+						}
+					",
+					'js'=>"
+						ajax_img('.ajax_img','#ajax_img');
+				
+						function ajax_img(cls,id){
+	
+						$(cls).click(function(){
+					   	 $.post($(this).attr('href'),function(c){
+					   		 $(id).html(c);
+					   		 
+					   		 $(id+' img').click(function(){
+					   			 	
+					   			redactor_content.insertHtml(\"<img src='\"+$(this).attr('rel')+\"' />\");
+					   			 
+					   		 });
+							$('.img_all_remove').click(function(){
+								$(id).html('');
+							});
+						ajax_img($(id+' a'),'#ajax_img');
+					   		 return false;
+					   	 });
+					   	 
+					   	 return false;
+					    });
+						
+					}
+					"
+				]
+					 
+			],
 		'type'=>[
 				'label'=>'分类',
 				'element'=>'select',

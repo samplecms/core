@@ -23,8 +23,9 @@ class Controller extends Theme{
 
 		helper_version(config('version')?:"2.1.0");
 
-		if(is_local())
+		if(is_local()){
 			config('host',"");
+		}
  
 
 

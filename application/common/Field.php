@@ -31,6 +31,14 @@ class Field
 		return $str;
 	}
 	
+	static function html($arr = []){
+		widgets('Js',[
+			'js_code'=>$arr['option']['js'],
+			'css_code'=>$arr['option']['css'],
+		]);
+		return $arr['option']['html'];
+	}
+	
 	
 	static function upload($arr = []){
 		$option = $arr['option']?:[];

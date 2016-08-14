@@ -1,0 +1,10 @@
+{volist name='model' id='v'}
+
+<img style="float:left;width:200px;height:200px;"  class="img-responsive img-border " rel="{$v->name}" src="{:app\\common\\Img::thumb($v->name,['w'=>200,'h'=>'200'])}" alt="">
+
+{/volist}
+        
+<br style="clear:both;"/>      
+{$model->render()}  
+
+<span class='glyphicon glyphicon-remove img_all_remove hand'></span>

@@ -13,7 +13,7 @@ RewriteRule /thumb/(.*)$ /helper/img/thumb?id=$1 [NC,R,L]
 namespace app\helper\controller;
 
 
-class Img{
+class Img extends \app\common\Controller{
 
 
 	public function thumb(){	
@@ -33,8 +33,8 @@ class Img{
 					
 			];
 		 	$type = config('thumb.type')?:1;
-		 	if($_GET['thumb_type']){
-		 		$fun = $used[$_GET['thumb_type']];
+		 	if($_GET['thumbtype']){
+		 		$fun = $used[$_GET['thumbtype']];
 		 	}else{
 		 		$fun = $used[$type];
 		 	}
@@ -60,12 +60,11 @@ class Img{
 			$ex = substr($dir,0,strrpos($dir,'/'));
 			  
 			if(!is_dir($ex)) mkdir($ex,0775,true);
-			 
 			$image = \think\Image::open($source);
 			// 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.png
-			if($text)
+			if($text){
 				$image->text($text,APP_PATH.'font/衡山毛筆KouzanBrushFont.ttf',20,'#fff');
-			
+			}
 			
 			$image->thumb($w, $h,$fun)->save($dir);
 			 
@@ -73,5 +72,16 @@ class Img{
 			echo $c;
 
 	}
+	
+	
+	
+	public function ajax(){
+		$m = \app\model\Upload::order('sort','desc')->order('_id','desc')->paginate(8);
+		
+		return $this->make('ajax',['model'=>$m]);
+	}
+	
+	
+	
 
 }
