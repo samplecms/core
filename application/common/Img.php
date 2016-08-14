@@ -78,17 +78,15 @@ class Img{
 	* @param string $arr 　 
 	* @return  string
 	*/
-	static function thumb($path,$arr = ['w'=>200,'h'=>200]){
+	static function thumb($path,$arr = ['w'=>200,'h'=>200,'thumb_type'=>1]){
 		$ext  = substr($path,strrpos($path,'.'));
 		$name = substr($path,0,strpos($path,'.')); 
 		foreach($arr as $k=>$v){
 			$e .=','.$k.'_'.$v;
 		}
 		$f = $name.$e.$ext;
-		if(substr($f,0,1)=='/')
-			$f = substr($f,1);
-		$f = substr($f,strpos($f,'/'));
-		return '/thumb'.$f;
+		 
+		return config('host').'/thumb'.$f;
 	} 
 
 	/**

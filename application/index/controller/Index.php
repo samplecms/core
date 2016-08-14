@@ -12,6 +12,10 @@ class Index extends \app\common\FrontController
         parent::init();
          
     }
+    public function cook(){
+    	echo 'cookie:';
+    	dump(cookie('admin_id'));
+    }
 	public function index()
     {
      

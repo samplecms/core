@@ -13,22 +13,22 @@ $c['minify_css'] = true;
 $c['minify_js'] = true;
 $c['minify_html'] = true;
 $c['version'] = "2.0";
-$c['host'] = "http://s0.wstaichi.com";
+$c['host'] = "http://t0.wstaichi.com";
 
 $c['helper']['title'] = [
-	'index.index.index'=>'起合|吴式太极',
-	'index.index.view'=>'起合|吴式太极',
+	'index.index.index'=>'起合|吴式太极拳',
+	'index.index.view'=>'上海太极拳,孙康太极拳,',
 ];
 
 $c['seo']['keywords'] = [
-	'index.index.index'=>'起合|吴式太极,孙康,上海太极拳,孙康太极拳,孙康吴式太极拳',
-	'index.index.view'=>'起合|吴式太极,孙康,上海太极拳,孙康太极拳,孙康吴式太极拳',
+	'index.index.index'=>'test1',
+	'index.index.view'=>'查看',
 
 ];
 
 $c['seo']['description'] = [
-	'index.index.index'=>'学习太极拳,从今天开始学习太极拳.',
-	'index.index.view'=>'学习太极拳,从今天开始学习太极拳.',
+	'index.index.index'=>'test2',
+	'index.index.view'=>'查看',
 
 ];
 

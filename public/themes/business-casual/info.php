@@ -2,6 +2,6 @@
 
 return [
 
-	'title' => '标题',
-	'subtitle'=>'sub',
+	'title' => '起合|吴式太极', 
+	'subtitle'=>'年轻人学太极拳 ',
 ];

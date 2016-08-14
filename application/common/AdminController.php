@@ -41,6 +41,9 @@ class AdminController extends Acl{
 			config('app_trace',true);
 		}
 		
+		config('app_debug',true);
+		config('app_trace',true);
+		
 		config('url_html_suffix','');
 		config('url_common_param',false);
 		config('url_route_on',true);

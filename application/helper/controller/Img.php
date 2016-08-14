@@ -17,12 +17,37 @@ class Img{
 
 
 	public function thumb(){	
+			$used = [
+				//常量，标识缩略图等比例缩放类型
+				1=>\think\Image::THUMB_SCALING,
+				//常量，标识缩略图缩放后填充类型
+				2=>\think\Image::THUMB_FILLED,
+				//常量，标识缩略图居中裁剪类型
+				3=>\think\Image::THUMB_CENTER,
+				//常量，标识缩略图右下角裁剪类型
+				4=>\think\Image::THUMB_NORTHWEST,
+ 				//常量，标识缩略图右下角裁剪类型	
+				5=>\think\Image::THUMB_SOUTHEAST,
+				//常量，标识缩略图固定尺寸缩放类型
+				6=>\think\Image::THUMB_FIXED,
+					
+			];
+		 	$type = config('thumb.type')?:1;
+		 	if($_GET['thumb_type']){
+		 		$fun = $used[$_GET['thumb_type']];
+		 	}else{
+		 		$fun = $used[$type];
+		 	}
+			
+			
+			$text = config('thumb.text');
+			
 			$WEB = realpath(ROOT_PATH.'public');
 			$id = $_GET['id'];
 			$dir = $WEB.'/thumb/'.$id;
 			$ext  = substr($id,strrpos($id,'.'));
 			$name = substr($id,0,strpos($id,','));
-			$source = $WEB.'/upload/'.$name.$ext;
+			$source = $WEB.'/'.$name.$ext;
 			$str = substr($id,strpos($id,',')+1); 
 			$str = substr($str,0,strrpos($str,'.'));
 			$arr = explode(',',$str);
@@ -38,7 +63,11 @@ class Img{
 			 
 			$image = \think\Image::open($source);
 			// 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.png
-			$image->thumb($w, $h)->save($dir);
+			if($text)
+				$image->text($text,APP_PATH.'font/衡山毛筆KouzanBrushFont.ttf',20,'#fff');
+			
+			
+			$image->thumb($w, $h,$fun)->save($dir);
 			 
 			$c = file_get_contents($dir);
 			echo $c;

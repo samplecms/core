@@ -16,13 +16,13 @@ class Post extends Base{
  
 	public $message = [
 			'title.require'  =>  ['title'=>'标题必须'],
-			'title.min'  =>  ['title'=>'标题字符不少于6'],
+			'title.min'  =>  ['title'=>'标题字符不少于3'],
 			'content' => ['content'=>'内容必须'],
 	];
 	
 	
 	public $rule = [
-			'title'  =>  'require|min:6',
+			'title'  =>  'require|min:3',
 			'content' =>  'require',
 	];
 	

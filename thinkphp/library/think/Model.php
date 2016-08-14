@@ -95,6 +95,8 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
     protected $relation;
     // 验证失败是否抛出异常
     protected $failException = false;
+    // 全局查询范围
+    protected static $useGlobalScope = true;
 
     /**
      * 初始化过的模型.
@@ -728,7 +730,7 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
         $db->startTrans();
         try {
             foreach ($dataSet as $key => $data) {
-                $result[$key] = self::create($data, $replace);
+                $result[$key] = self::create($data, $replace, false);
             }
             $db->commit();
             return $result;
@@ -942,12 +944,13 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
      * @access public
      * @param array     $data 数据数组
      * @param bool      $replace 是否replace
+     * @param bool      $getId 是否返回自增主键
      * @return $this
      */
-    public static function create($data = [], $replace = false)
+    public static function create($data = [], $replace = false, $getId = true)
     {
         $model = new static();
-        $model->isUpdate(false)->save($data, [], true, $replace);
+        $model->isUpdate(false)->save($data, [], $getId, $replace);
         return $model;
     }
 
@@ -1075,6 +1078,19 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
                 }
             }
         }
+        return $model;
+    }
+
+    /**
+     * 设置是否使用全局查询范围
+     * @param bool  $use 是否启用全局查询范围
+     * @access public
+     * @return Model
+     */
+    public static function useGlobalScope($use)
+    {
+        $model                  = new static();
+        static::$useGlobalScope = $use;
         return $model;
     }
 
@@ -1298,7 +1314,7 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
     {
         $query = $this->db();
         // 全局作用域
-        if (method_exists($this, 'base')) {
+        if (static::$useGlobalScope && method_exists($this, 'base')) {
             call_user_func_array('static::base', [ & $query]);
         }
         if (method_exists($this, 'scope' . $method)) {
@@ -1320,7 +1336,7 @@ abstract class Model implements \JsonSerializable, \ArrayAccess
         }
         $query = self::$links[$model];
         // 全局作用域
-        if (method_exists($model, 'base')) {
+        if (static::$useGlobalScope && method_exists($model, 'base')) {
             call_user_func_array('static::base', [ & $query]);
         }
         return call_user_func_array([$query, $method], $params);
