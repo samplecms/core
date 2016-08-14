@@ -27,18 +27,20 @@ class Db{
 
     static function posts_types($title){
 
-         $m = Type::where('title',$title)->find();
+         $m = Type::where('name',$title)->find();
          if($m){
             $id = (string)$m->_id;
+            $type = Post::where('type',$id)->find();
+            
             $count = Post::where('type',$id)->count();
             if($count==1){
-                return ['model'=>Post::where('type',$id)->find(),'count'=>$count];
+                return ['model'=>Post::where('type',$id)->find(),'count'=>$count,'seo'=>$type->title];
             }
             $all = Post::where('type',$id)
                      ->order('sort','desc')
                      ->order('_id','desc')
                      ->paginate(10);
-            return ['model'=>$all,'count'=>$count];
+            return ['model'=>$all,'count'=>$count,'seo'=>$type->title];
          }      
            
     }

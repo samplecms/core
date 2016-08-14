@@ -1,0 +1,38 @@
+{extend name="admin" /}
+{block name="content"} 
+	
+
+<p>文件管理</p>
+
+
+
+<table class="table  " >
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {volist name='model' id='v'}
+        <tr>
+          <th>
+          
+          	<img style="width:60px;height:60px;"  class="img-responsive img-border " rel="{$v->name}" src="{:app\\common\\Img::thumb($v->name,['w'=>200,'h'=>'200'])}" alt="">
+          </th>
+          <td>
+          	<a class='glyphicon glyphicon-edit' href="{:url('admin/file/fixedposition',['id'=>$v._id,'di'=>90])}"></a>
+          
+          	<a class='glyphicon glyphicon-remove' href="{:url('admin/file/remove',['id'=>$v._id])}"></a>
+          </td>
+        </tr>
+      {/volist}
+        
+      </tbody>
+    </table>
+ 
+{/block}
+
+
+
+{/block}

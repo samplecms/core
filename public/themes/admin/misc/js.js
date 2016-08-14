@@ -13,8 +13,6 @@ $(function(){
          ui_sort();
 
 
-         // $(document).pjax('a', '#page', { fragment: ('#page'), timeout: 10000 });
-
          
 
 	 

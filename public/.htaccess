@@ -6,7 +6,7 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
 
-
   RewriteCond %{REQUEST_FILENAME} !\.(jpg|jpeg|png|gif|bmp)$ 
   RewriteRule /thumb/(.*)$ /helper/img/thumb?id=$1 [NC,R,L]
+ 
 </IfModule>

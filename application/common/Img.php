@@ -88,7 +88,10 @@ class Img{
 		if(is_local()){
 			config('host',"");
 		}
-		return config('host').'/thumb'.$f;
+		if(config('host') && !file_exists(public_path().'thumb'.$f)){
+			return base_url().'thumb'.$f;
+		}
+		return config('host').base_url().'thumb'.$f;
 	} 
 
 	/**

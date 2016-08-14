@@ -11,16 +11,19 @@ class Type extends Base{
 	public $field_title = '分类';
 	public $table = 'type';
 	
-	public $allowField = ['title','status','sort'];
+	public $allowField = ['title','status','sort','name'];
 	
 	public $message = [
 			'title.require'  =>  ['title'=>'标题必须'],
 			'title.min'  =>  ['title'=>'标题字符不少于3'],
+			'name.require'  =>  ['name'=>'唯一标识必须'],
+			'name.unique'  =>  ['name'=>'唯一标识重复'],
 	];
 	
 	
 	public $rule = [
 			'title'  =>  'require|min:3',
+			'name'=>'require|unique:type,name'
 	];
 	
 	public $field_form = [
@@ -28,6 +31,12 @@ class Type extends Base{
 			'label'=>'标题',	
 			'element'=>'input',
 				
+		],
+			
+		'name'=>[
+				'label'=>'唯一标识',
+				'element'=>'input',
+		
 		],
 		
 		'status'=>[
@@ -45,8 +54,8 @@ class Type extends Base{
 	
 	
 	public $scene = [
-			'add'   =>  ['title'],
-			'edit'  =>  ['title'],
+			'add'   =>  ['title','name'],
+			'edit'  =>  ['title','name'],
 	];
 	
 	static function element_select(){

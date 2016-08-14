@@ -12,10 +12,7 @@ class Index extends \app\common\FrontController
         parent::init();
          
     }
-    public function cook(){
-    	echo 'cookie:';
-    	dump(cookie('admin_id'));
-    }
+     
 	public function index()
     {
      
@@ -30,7 +27,7 @@ class Index extends \app\common\FrontController
             $m =  Db::posts();    
         }
 
- 
+ 		$type = $m['seo'];
         //title seo
         $this->title = $type;
         $this->description = $type;

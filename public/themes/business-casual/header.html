@@ -18,14 +18,21 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li {if condition="$type=='吴式太极拳'"} class="active"{/if}>
-                        <a href="{:url('index/index/page',['type'=>'吴式太极拳'])}">吴式太极拳</a></li>
-                    <li {if condition="$type=='课程安排'"} class="active"{/if}>
-                      <a href="{:url('index/index/page',['type'=>'课程安排'])}">课程安排</a></li>
-                    <li {if condition="$type=='招生简章'"} class="active"{/if}>
-                      <a href="{:url('index/index/page',['type'=>'招生简章'])}">招生简章</a></li>
+                    <li {if condition="$type=='tjq'"} class="active"{/if}>
+                        <a href="{:url('index/index/page',['type'=>'tjq'])}">吴式太极拳</a></li>
+                        
+                    <li {if condition="$type=='pic'"} class="active"{/if}>
+                      <a href="{:url('index/index/page',['type'=>'pic'])}">照片墙</a></li>
+                    
+                    <li {if condition="$type=='video'"} class="active"{/if}>
+                      <a href="{:url('index/index/page',['type'=>'video'])}">视频片段</a></li>
+                      
+                    <li {if condition="$type=='class'"} class="active"{/if}>
+                      <a href="{:url('index/index/page',['type'=>'class'])}">课程安排</a></li>
+                      
+                     
                     <li {if condition="$type=='联系方式'"} class="active"{/if}>
-                      <a href="{:url('index/index/page',['type'=>'联系方式'])}">联系方式</a></li>
+                      <a href="{:url('index/index/page',['type'=>'connect'])}">联系方式</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

@@ -157,6 +157,14 @@ if(!function_exists('helper_version')){
 
 }
 
+if(!function_exists('public_path')){
+	
+	function public_path(){
+		return realpath(__DIR__.'/../public').'/';
+	}
+	
+}
+
 
 if(!function_exists('minify_html')){
 	function minify_html($data){
@@ -263,12 +271,12 @@ if(!function_exists('helper_link')){
  
 if(!function_exists('theme_load_file')){
 
-	function theme_load_file($file){
+	function theme_load_file($file,$ext = '.php'){
 		static $c;
 		if($c[$info]){
 			return $c[$info];
 		}
-		$info =  config('template.view_path').$file.'.php';
+		$info =  config('template.view_path').$file.$ext;
 		if(file_exists($info)){
 			$c[$info] = include $info;
 		}
@@ -313,6 +321,14 @@ if(!function_exists('theme_url')){
 		$module  = $request->module();
 		$id = $request->controller();
 		return   base_url().config('template.view_url');
+	}
+
+}
+
+if(!function_exists('theme_html')){
+
+	function theme_html($file,$ext='.html'){
+		return  config('template.view_path').$file.$ext;
 	}
 
 }
