@@ -8,8 +8,14 @@
 <span class='label label-info'>创建</span>
 </a>
 
- 
-
+{if condition="$form"}
+<form method="get">
+  {$form}
+  
+  <button type="submit" class="btn btn-primary">搜索</button>
+  <a href="{:url('admin/field/index',['eqtype'=>$type])}" class="btn btn-default">重置</a>
+</form>
+{/if}
 </p>
 
 <form method="post" class="{:$sort}" action="{:url('admin/field/sort',['eqtype'=>$type])}">
@@ -17,16 +23,23 @@
     <table class="table table-bordered " >
       <thead>
         <tr>
-          <th>标题</th>
-          <th></th>
+        {volist name='show_files' id='vo' mode="1"}
+          <th>{$labels[$vo]}</th>
+        {/volist}
+        <th></th>
+        
         </tr>
       </thead>
       <tbody>
       {volist name='list' id='v'}
         <tr>
-          <th>{php}echo $v->$field0{/php}
-          <input type='hidden' value="{$v._id}" name="sorttable[]">
+         {volist name='show_files' id='vo' mode="1"}
+
+          <th>{$v->$vo}
+            {eq name="mod" value="1"}<input type='hidden' value="{$v._id}" name="sorttable[]"> {/eq}
+           
           </th>
+          {/volist}
           <td>
           	<a class='glyphicon glyphicon-edit' href="{:url('admin/field/create',['eqtype'=>$type,'id'=>$v._id])}"></a>
           </td>

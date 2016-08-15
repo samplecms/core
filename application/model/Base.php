@@ -18,7 +18,17 @@ class Base extends Model{
 	//每页显示记录
 	public $page = 10;
 	public $allowField;
+	//列表显示字段
+	public $query_list ;
+	public $query_sort ;
+	public $query_form ;
+	public $field_label = [
+		'title'=>'标题',
+		'create_at'=>'创建时间',
+	];
 
+
+	
 	/**
 	 * 架构函数
 	 * @access public

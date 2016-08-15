@@ -1404,4 +1404,22 @@ class Request
         }
         return $this->content;
     }
+
+    /**
+     * 生成请求令牌
+     * @access public
+     * @param string $name 令牌名称
+     * @param mixed  $type 令牌生成方法
+     * @return string
+     */
+    public function token($name = '__token__', $type = 'md5')
+    {
+        $type  = is_callable($type) ? $type : 'md5';
+        $token = call_user_func($type, $_SERVER['REQUEST_TIME_FLOAT']);
+        if ($this->isAjax()) {
+            header($name . ': ' . $token);
+        }
+        Session::set($name, $token);
+        return $token;
+    }
 }

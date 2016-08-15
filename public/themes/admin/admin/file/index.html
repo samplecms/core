@@ -5,6 +5,11 @@
 <p>文件管理</p>
 
 
+{:widgets('Plupload')}
+
+ 
+
+
 
 <table class="table  " >
       <thead>
@@ -21,8 +26,8 @@
           	<img style="width:60px;height:60px;"  class="img-responsive img-border " rel="{$v->name}" src="{:app\\common\\Img::thumb($v->name,['w'=>200,'h'=>'200'])}" alt="">
           </th>
           <td>
-          	<a class='glyphicon glyphicon-edit' href="{:url('admin/file/fixedposition',['id'=>$v._id,'di'=>90])}"></a>
-          
+          	<a class='glyphicon glyphicon-chevron-left' title="逆时针90度" href="{:url('admin/file/fixedposition',['id'=>$v._id,'di'=>-90])}"></a>
+            <a class='glyphicon glyphicon-chevron-right' title="顺时针90度" href="{:url('admin/file/fixedposition',['id'=>$v._id,'di'=>90])}"></a>
           	<a class='glyphicon glyphicon-remove' href="{:url('admin/file/remove',['id'=>$v._id])}"></a>
           </td>
         </tr>
@@ -31,6 +36,14 @@
       </tbody>
     </table>
  
+
+
+max_execution_time: {:ini_get('max_execution_time')} <br>
+memory_limit : {:ini_get('memory_limit') } <br>
+upload_max_filesize : {:ini_get('upload_max_filesize')} <br>
+post_max_size : {:ini_get('post_max_size') } <br>
+
+
 {/block}
 
 

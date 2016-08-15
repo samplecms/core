@@ -22,6 +22,7 @@ class File extends \app\common\AdminController{
 		
 		
 		$url = public_path().\app\common\Img::thumb($m->name,['w'=>200,'h'=>'200']);
+		$url = str_replace('//', '/', $url);
 		@unlink($url);
 		return $this->success('操作成功',url('admin/file/index'),null,1);
 	}

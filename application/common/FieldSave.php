@@ -31,22 +31,127 @@ class FieldSave extends \app\common\AdminController{
 	}
 
 
-	public function index($eqtype)
+	public function index($eqtype,$sort = null)
     {
+        
 		 
     	$this->load_model($eqtype);
     	  
         $m = $this->m;
-        Hook::listen($this->hook.'index',$m);
 
+        
+        $asc_decs = "desc";
+
+        if($sort){
+            $sort_arr = explode(',', $sort);
+            $m = $m->order($sort_arr[0],$sort_arr[1]);
+
+            if($sort_arr[1] == 'desc'){
+                $asc_decs = 'asc';
+            }
+
+
+        }else{
+            Hook::listen($this->hook.'index',$m);
+        }
+
+        $qlist = $this->m->query_list;
         $field0 = \app\common\Arr::get($this->m->field_form)['k'];
     	
-    	$data['list'] = $m->paginate($this->m->page?:10);
+
+        ////////////////
+        //form
+        $query_form  = $this->m->query_form;
+        if($query_form){
+            foreach($query_form as $k=>$v){
+                $ele_data = $v['data'];
+                unset($datas,$attr);
+                if(is_string($ele_data)){
+                    $ele_data = explode('::',$ele_data);
+                    $q1 = $ele_data[0];
+                    $q2 = $ele_data[1];
+                    $ns =  "\app\\model\\".$q1;
+                    $datas = $ns::$q2();
+                }elseif(is_array($ele_data)){
+                    $datas = $ele_data;
+                }
+                $type1 = $v['element'];
+                $attr['label'] = $v['label']?:$this->m->field_label[$k];
+                $attr['value'] = $values[$k];
+                $attr['option'] = $v['option'];
+                if($datas){
+                    $attr['data'] = $datas;
+                }
+                $attr['field'] = $k;
+                $form.= FieldForm::$type1($attr);
+
+                $query_condition[$k] = $v['condition'];
+            }
+        }
+
+        if($_GET){
+            foreach ($_GET as $key => $value) {
+                $e = $query_condition[$key];
+                if($e){
+                    foreach ($e as $keys) {
+
+                        $cvalue = str_replace('{value}', $value, $keys['condition']);
+                        $op = $keys['op'];
+                        
+                        $m = $m->where($key,$op,$cvalue);
+                    }
+                    
+                }
+            }
+        }
+
+
+
+
+
+        ////////////////
+
+
+    	$query = $data['list'] = $m->paginate($this->m->page?:10);
+        //
+        if($qlist){
+            foreach($qlist as $k=>$v){
+                $show_files[$k] = $k;
+            }
+            foreach($query as $key => $vo){
+                
+                 foreach($qlist as $k=>$v){
+                     $value = $vo->$k;
+                     $v = str_replace('{value}',$value,$v);
+                     $vo->$k = $v;
+                 }
+                 $query[$key] = $vo;
+            }
+        }else{
+            $show_files[$field0] = $field0;
+        }
+
+
+        
+
     	$data['title'] = $this->title;
     	$data['type'] = $this->field;
         $data['field0'] = $field0;
         $data['sort'] = $this->m->support_query_sort()?"sort_table ajax_form":"";
+        $data['show_files'] = $show_files;
+        $ls = $this->m->field_label;
 
+        $query_sort = $this->m->query_sort;
+
+        if($query_sort){
+            foreach($ls as $k=>$v){
+                if(in_array($k,$query_sort)){
+                    $ls[$k] = "<a href='".url('admin/field/index',['eqtype'=>$eqtype,'sort'=>$k.','.$asc_decs])."'>$v</a>";
+                }
+            }
+        }
+        $data['labels'] = $ls;
+        $data['form'] = $form;
 
     	return $this->make($this->view_list,$data);
     }
@@ -81,7 +186,7 @@ class FieldSave extends \app\common\AdminController{
     			$datas = $ele_data;
     		}
     		$type1 = $v['element'];
-    		$attr['label'] = $v['label'];
+    		$attr['label'] = $v['label']?:$this->m->field_label[$k];
     		$attr['value'] = $values[$k];
             $attr['option'] = $v['option'];
     		if($datas){

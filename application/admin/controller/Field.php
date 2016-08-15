@@ -31,10 +31,10 @@ class Field extends \app\common\AdminController{
 	 
 
 
-	public function index($eqtype)
+	public function index($eqtype,$sort = null)
     { 
 
-    	return $this->m->index($eqtype);
+    	return $this->m->index($eqtype,$sort);
     }
     
      
