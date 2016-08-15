@@ -26,5 +26,5 @@ public/thumb
 
 ![Alt text](/doc/img/type.png)
 
-![Alt text](/doc/img/11.png)
+
  
