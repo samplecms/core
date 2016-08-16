@@ -78,7 +78,7 @@ class Post extends Base{
 					'call'=>"
 						$('.form-field-files img').click(function(){
 							 	console.log($(this).attr('src'));
-								redactor_content.insertHtml('<img src=\"'+$(this).attr('rel')+'\" />');	
+								redactor_content.insertHtml('<img  class=\"img-thumbnail\" src=\"'+$(this).attr('rel')+'\" />');	
 						});
 						
 					",
@@ -113,7 +113,7 @@ class Post extends Base{
 					   		 
 					   		 $(id+' img').click(function(){
 					   			 	
-					   			redactor_content.insertHtml(\"<img src='\"+$(this).attr('rel')+\"' />\");
+					   			redactor_content.insertHtml(\"<img  class='img-thumbnail' src='\"+$(this).attr('rel')+\"' />\");
 					   			 
 					   		 });
 							$('.img_all_remove').click(function(){

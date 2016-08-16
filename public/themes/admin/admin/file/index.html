@@ -28,7 +28,7 @@
           <td>
           	<a class='glyphicon glyphicon-chevron-left' title="逆时针90度" href="{:url('admin/file/fixedposition',['id'=>$v._id,'di'=>-90])}"></a>
             <a class='glyphicon glyphicon-chevron-right' title="顺时针90度" href="{:url('admin/file/fixedposition',['id'=>$v._id,'di'=>90])}"></a>
-          	<a class='glyphicon glyphicon-remove' href="{:url('admin/file/remove',['id'=>$v._id])}"></a>
+          	<a onclick="return confirm('确认删除？');" class='glyphicon glyphicon-remove' href="{:url('admin/file/remove',['id'=>$v._id])}"></a>
           </td>
         </tr>
       {/volist}
@@ -36,7 +36,7 @@
       </tbody>
     </table>
  
-
+    {$model->render()}  
 
 
 
