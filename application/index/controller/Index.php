@@ -43,8 +43,8 @@ class Index extends \app\common\FrontController
         }else{
             $data['model'] = $m;
         }
-        
-        
+
+         
         return  $this->make('/page',$data);
     }
 

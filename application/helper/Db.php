@@ -40,6 +40,7 @@ class Db{
                      ->order('sort','desc')
                      ->order('_id','desc')
                      ->paginate(10);
+                     
             return ['model'=>$all,'count'=>$count,'seo'=>$type->title];
          }      
            

@@ -36,6 +36,7 @@ class Acl extends Controller{
 	}
 	public function init(){
 		parent::init();
+		
 		$arr = helper_current_request();
 		$this->module = strtolower($arr['module']);
 		$this->id = strtolower($arr['controller']);
@@ -44,6 +45,8 @@ class Acl extends Controller{
 		if(!$this->_auth_check()){
 			$this->_no_auth_message();
 		}
+
+		
 
 	}
 

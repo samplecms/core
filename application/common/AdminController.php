@@ -36,10 +36,7 @@ class AdminController extends Acl{
 
 	public function init(){
 		parent::init();
-		if(is_local()){
-			config('app_debug',true);
-			config('app_trace',true);
-		}
+		 
 		
 		 
 		config('host','');
