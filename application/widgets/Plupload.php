@@ -32,15 +32,21 @@ class Plupload extends Base{
 	function run(){
 
 		$this->option['count'] = $this->option['count']?:1;
-		$this->option['size'] = $this->option['size']?:5; //10M
-		$this->option['maxSize'] = $this->option['maxSize']?:5; //10M
+		$this->option['size'] = $this->option['size']?:10; //10M
+		$this->option['maxSize'] = $this->option['maxSize']?:10; //10M
 		$this->option['ext'] = $this->option['ext']?:'jpg,jpeg,gif,png';
 		$this->option['url'] = $this->option['url']?:"/admin/upload/index";
 		$this->option['urlHash'] = $this->option['urlHash']?:"/admin/upload/hash";
 		$this->option['class'] = $this->option['class']?:"upload";
 		$this->option['label'] = $this->option['label']?:"上传文件";
 		$this->ele = $this->ele?:'file';
+		
+		
 
+		ini_set('upload_max_filesize',$this->option['maxSize']." M");
+		ini_set('post_max_size',$this->option['maxSize']." M");
+		
+		
 		$data = $this->option['data'];
 
 		$call = $this->option['call'];
