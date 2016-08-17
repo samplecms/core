@@ -49,6 +49,16 @@ class Post extends Base{
 				
 		],
 
+		'type'=>[
+			
+			'element'=>'select',
+			'condition'=>[
+				['op'=>'=','condition'=>'{value}']
+				
+			],
+			'data'=>"Type::element_select",
+				
+		],
 
 	];
 	
@@ -170,16 +180,26 @@ class Post extends Base{
 	static function before_insert(&$data){
 		$data['sort'] = time();
 	}
+	public $files;
+	public function getThumbAttr($value){  
+		
+		$c = $this->content;
+		$ar = \app\common\Img::get_local_one($c);
 
-
-	public function getFilesAttr($value){  
-		if(!$value){
-			return [ 
-				theme_url().'misc/img/slide-2.jpg'
-			];
+		if($ar){
+			return $ar;
 		}
-		return $value;
+
+		if($this->files){
+			return $this->files[0];
+		}
+
+		return theme_url().'misc/img/slide-2.jpg';
+
+		
 	}
+	 
+	 
 	 
 	
 	
