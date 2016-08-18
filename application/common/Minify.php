@@ -67,7 +67,7 @@ class Minify{
 			if(!is_dir($dir)){ mkdir($dir,0777,true); }
 
 			$minifier = new MinifyCore\CSS();
-
+			if(!$files)return;
 			foreach($files as $v){
 
 				$v = static::__find($v);
@@ -101,7 +101,7 @@ class Minify{
 			if(!is_dir($dir)){ mkdir($dir,0777,true); }
 
 			$minifier = new MinifyCore\JS();
-
+			if(!$files)return;
 			foreach($files as $v){
 				$v = static::__find($v);
 

@@ -12,6 +12,8 @@
 					   {:\app\\helper\\Comm::replace_content($model->content,['w'=>500,'h'=>400])}
 				</div>
 				<br style='clear: both;'>
+				
+					<a href="{:url('index/pages/view',['id'=>$id])}">在微信中分享</a>
 				</div>
 			</div>
 </div>
@@ -29,7 +31,8 @@
 	margin-bottom:10px;
 	
 }
-.block{
+
+#page_view p,#page_view div,.block{
 clear:both;
 display:block;
 }

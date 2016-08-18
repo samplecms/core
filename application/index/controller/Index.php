@@ -68,7 +68,8 @@ class Index extends \app\common\FrontController
         $this->title = $type;
         $this->description = $type;
         $this->keywords = $type;
-
+		$data['id']  = $id;
+		
         return  $this->make('/view',$data);
     }
     
