@@ -17,13 +17,13 @@ class Type extends Base{
 			'title.require'  =>  ['title'=>'标题必须'],
 			'title.min'  =>  ['title'=>'标题字符不少于3'],
 			'name.require'  =>  ['name'=>'唯一标识必须'],
-			'name.unique'  =>  ['name'=>'唯一标识重复'],
+			'name.my_unique'  =>  ['name'=>'唯一标识重复'],
 	];
 	
 	
 	public $rule = [
 			'title'  =>  'require|min:3',
-			'name'=>'require|unique:type,name'
+			'name'=>'require|my_unique:type,name'
 	];
 	
 	public $field_form = [

@@ -46,7 +46,8 @@ class Field extends \app\common\AdminController{
      
     public function create($eqtype,$id=null)
     {
-    	 
+    	$_GET['eqtype'] = $eqtype;
+    	$_GET['id'] = $id;
     	return $this->m->create($eqtype,$id);
     }
 
@@ -57,6 +58,11 @@ class Field extends \app\common\AdminController{
     }
     
     public function save($eqtype,$id = null){
+
+        $_GET['eqtype'] = $eqtype;
+        $_GET['id'] = $id;
+
+        
     	return $this->m->save($eqtype,$id);
     	
     }

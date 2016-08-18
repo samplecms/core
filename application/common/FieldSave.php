@@ -268,12 +268,13 @@ class FieldSave extends \app\common\AdminController{
      
 
          
-        $validate = new \think\Validate($rules,$messages);
+        $validate = new Validate($rules,$messages);
           
 
         if (!$validate->check($data)) {
             $error  = $validate->getError();
             if($error){
+                
                 echo json_encode(['msg'=>$error]);
             
                 exit;    
@@ -293,11 +294,8 @@ class FieldSave extends \app\common\AdminController{
 
 
         Hook::listen($this->hook.'before_save',$data);
-
-
-        $validate = \think\Loader::validate('Field');
-        $validate->rule($rule);
-        $validate->message($message);
+ 
+      
 
     	if($id){
             Hook::listen($this->hook.'before_update',$data);

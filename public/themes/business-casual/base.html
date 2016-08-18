@@ -23,7 +23,7 @@ base_url().'misc/holder.js',
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="{:app\\helper\\Seo::get('keywords')} " />
 <meta name="description" content="{:app\\helper\\Seo::get('description')}" />
-
+{:app\\common\\Hook::listen('header')}
 
 </head>
 <body >
@@ -48,7 +48,7 @@ base_url().'misc/holder.js',
 
 {:output()}
 
-
+{:app\\common\\Hook::listen('footer')}
 <div style="display:none">
 
 <script src="https://s95.cnzz.com/z_stat.php?id=1259838087&web_id=1259838087" language="JavaScript"></script>

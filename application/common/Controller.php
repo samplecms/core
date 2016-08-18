@@ -25,8 +25,8 @@ class Controller extends Theme{
 
 		if(is_local()){
 			config('host',"");
-			//config('app_debug',true);
-			//config('app_trace',true);
+			config('app_debug',true);
+			config('app_trace',true);
 		}
  
 
