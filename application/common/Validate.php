@@ -69,7 +69,7 @@ class Validate extends \think\Validate{
         		return false;
         	}
         	return true;
-        }exit;
+        } 
 
 
         if ($db->where($map)->field($pk)->find()) {
