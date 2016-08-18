@@ -26,9 +26,11 @@ class Widgets
 	
 	static function render($types = ['css','js','js_code','css_code']){
 		static::before_render();
+		$output = "";
 		foreach($types as $v){
-			echo @static::$arr[$v];
+			$output.= @static::$arr[$v];
 		}
+		return $output;
 	
 	}
 	

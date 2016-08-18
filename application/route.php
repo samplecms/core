@@ -1,22 +1,17 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
+ 
 
 return [
     '__pattern__' => [
         'name' => '\w+',
     ],
 
-    'page'     => 'index/index/page',
-    'page/:type'     => 'index/index/page',
-    'view/:id'     => 'index/index/view',
-    'login'     => 'admin/index/login',
+    
+    'pages/:type'     => 'index/index/page',
 
+    'view/:id'     => 'index/index/view',
+    
+    'login'     => 'admin/index/login',
+    'adminField/:eqtype'     => 'admin/field/index',
+    'adminFile'     => 'admin/file/index',
 ];

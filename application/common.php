@@ -168,21 +168,21 @@ if(!function_exists('public_path')){
 
 if(!function_exists('minify_html')){
 	function minify_html($data){
-		return \app\helper\Minify::html($data);
+		return \app\common\Minify::html($data);
 	}
 }
 
 
 if(!function_exists('minify_css')){
 	function minify_css(){
-		return \app\helper\Minify::output('css');
+		return \app\common\Minify::output('css');
 	}
 }
 
 
 if(!function_exists('minify_js')){
 	function minify_js(){
-		return \app\helper\Minify::output('js');
+		return \app\common\Minify::output('js');
 	}
 }
 
@@ -238,7 +238,7 @@ if(!function_exists('helper_link')){
 			$version = helper_version();
 		}
 		if(config('minify_js') === true || config('minify_css') === true){
-			\app\helper\Minify::set($url);
+			\app\common\Minify::set($url);
 		}
 
 		$url = $url."?v=".$version;
@@ -298,6 +298,12 @@ if(!function_exists('theme_include')){
 
 }
 
+if(!function_exists('output')){
+	
+	function output(){
+		return \app\common\Output::assets();
+	}
+}
 
  
 if(!function_exists('helper_current_request')){

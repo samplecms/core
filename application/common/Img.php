@@ -8,7 +8,6 @@
 // +----------------------------------------------------------------------
 namespace app\common;
 class Img{
-
  
 	/*	
 	*
@@ -111,8 +110,8 @@ class Img{
 	* @param string $str 　 
 	* @return  string/null
 	*/
-	static function get_local_one($str){
-		return static::local($str , false);
+	static function get_local_one($str,$return_img_tag = false){
+		return static::local($str , false,$return_img_tag );
 	} 
  	/**
 	* 本地的所有图片,如果存在返回图片的URL 
@@ -120,8 +119,8 @@ class Img{
 	* @param string $str 　 
 	* @return  array/null
 	*/
-	static function get_local_all($str){
-		return static::local($str , true);
+	static function get_local_all($str,$return_img_tag = false){
+		return static::local($str , true,$return_img_tag);
 	}
  
 	/**
@@ -130,8 +129,8 @@ class Img{
 	* @param string $str 　 
 	* @return  string/null
 	*/
-	static function get_one($str){
-		return static::get($str , false);
+	static function get_one($str,$return_img_tag = false){
+		return static::get($str , false,$return_img_tag);
 	}
 	 
 	/**
@@ -140,8 +139,8 @@ class Img{
 	* @param string $str 　 
 	* @return  array/null
 	*/
-	static function get_all($str){
-		return static::get($str , true);
+	static function get_all($str,$return_img_tag = false){
+		return static::get($str , true,$return_img_tag );
 	} 
 	/**
 	* 移除内容中的图片元素
@@ -168,10 +167,14 @@ class Img{
  	/**
 	*  内部函数
 	*/
-	static function get($content,$all=true){ 
+	static function get($content,$all=true,$return_img_tag = false){ 
 		$preg = '/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i'; 
 		preg_match_all($preg,$content,$out);
-		$img = $out[2];  
+		$i = 2;
+		if($return_img_tag === true){
+			$i = 0;
+		}
+		$img = $out[$i];  
 		if($all === true){
 			return $img;
 		}else if($all === false){
@@ -182,8 +185,8 @@ class Img{
 	/**
 	*  内部函数
 	*/
-	static function local($content,$all=false){  
-		$img = static::get($content, true);
+	static function local($content,$all=false,$return_img_tag = false){  
+		$img = static::get($content, true,$return_img_tag);
 		if($img) { 
 			$num = count($img); 
 			for($j=0;$j<$num;$j++){ 

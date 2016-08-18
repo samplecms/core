@@ -16,7 +16,7 @@ $css = [
 
 echo  \app\helper\Minify::css($css);
 */
-namespace app\helper;
+namespace app\common;
 use MatthiasMullie\Minify as MinifyCore;
 class Minify{
 
@@ -39,7 +39,7 @@ class Minify{
 
 		}
 
-		$url = \app\helper\Minify::$type($links)."?version=".helper_version();
+		$url = \app\common\Minify::$type($links)."?version=".helper_version();
 		if($type=='css'){
 			return  '<link rel="stylesheet" href="'.config('host').$url.'">';			
 		}elseif($type == 'js'){

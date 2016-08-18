@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>{block name="title"}{if $title}{$title},{/if}{:app\\helper\\Title::get()}{/block}</title>
+<title>{block name="title"}{if $title}{$title}{/if}{:app\\helper\\Title::get()}{/block}</title>
 
 
 {:helper_link([
@@ -10,6 +10,7 @@ theme_url().'misc/css/business-casual.css',
 theme_url().'css.css',
 
 ])}
+
 {:widgets('Bootstrap')}
 
 {:helper_link([
@@ -17,14 +18,7 @@ base_url().'misc/jquery.js',
 base_url().'misc/holder.js',
 
 ])}
- 
- 
-{:widgets()}
-
-
-{:minify_css()}
-
- 
+  
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="{:app\\helper\\Seo::get('keywords')} " />
@@ -52,9 +46,13 @@ base_url().'misc/holder.js',
 {block name="footer"}{/block}
 
 
+{:output()}
 
 
-{:minify_js()}
+<div style="display:none">
 
+<script src="https://s95.cnzz.com/z_stat.php?id=1259838087&web_id=1259838087" language="JavaScript"></script>
+
+</div>
  </body>
 </html>

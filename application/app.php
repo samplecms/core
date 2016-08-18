@@ -14,13 +14,13 @@ $c['menu'] = [
 $c['minify_css'] = true;
 $c['minify_js'] = true;
 $c['minify_html'] = true;
-$c['version'] = "2.0";
+$c['version'] = "2.1";
 $c['host'] = "http://s0.wstaichi.com";
 
 $c['helper']['title'] = [
-	'index.index.index'=>'起合|吴式太极拳',
-	'index.index.page'=>'起合|吴式太极拳,',
-	'index.index.view'=>'起合|吴式太极拳,',
+	'index.index.index'=>'吴式太极',
+	'index.index.page'=>'吴式太极',
+	'index.index.view'=>'吴式太极',
 ];
 
 $c['seo']['keywords'] = [

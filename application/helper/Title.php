@@ -23,7 +23,10 @@ class Title{
 		$r = $arr[$request];
 
 		if($r){
-			return config('helper_title_set_it').$r;
+			if(!config('helper_title_set_it')){
+				return $r;
+			}
+			return config('helper_title_set_it').'|'.$r;
 		}
 
 		return config('helper_title_set_it');
